@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+</head>
+<body>
+<h1> Hello, {{user.username}}. Save file here</h1>
+<p>Use this form to save files</p>
+
+<form method="post" action="/add_file" >
+    <input type="file" name="file-name" required>
+    <input type="date" name="live-date" required>
+    <input type="time" name="live-time" required>
+    <input type="hidden" name="id" value="{{user.id}}">
+    <button type="submit">Save file</button>
+</form>
+<br>
+<h2>File list</h2>
+<hr>
+<ol>
+{% for file in user.files %}
+    <li>
+    {% if file.valid == True %}
+       <a href="{{ url_for('get_file_date',file_id=file.id, user_id=user.id)}}"> {{ file.name }} </a>  expires  {{ file.date }} at {{file.time }}
+    {% endif %}
+
+    {% if file.valid == False %}
+        <a href="{{url_for('file_not_found')}}"> {{file.name}} </a> expired {{file.date}} at {{file.time}}
+    {% endif %}
+    </li>
+
+{% endfor %}
+</ol>
+
+<a href="{{url_for('index')}}">Back home</a>
+</body>
+</html>

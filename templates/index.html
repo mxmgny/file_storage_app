@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+    <style>
+        .hidden {
+        display: none;
+        }
+        form {
+            padding:15px;
+        }
+    </style>
+</head>
+<body>
+<h1> Hello there</h1>
+<p>This app allows you to store files for limited time, so be careful =) </p>
+
+<button onclick="login()">LOG IN</button>
+<button onclick="signup()">SIGN UP</button>
+
+<form class="hidden" id="login" action="/user" method="get">
+    <label for="enter-user">Use your login</label>
+    <input type="text" id="enter-user"  name="username" required>
+    <button id="submit-button" type="submit">Enter</button>
+</form>
+
+
+<script>
+function login() {
+    let form = document.getElementById('login');
+    let button = document.getElementById('submit-button');
+    let label = document.querySelector('label');
+    form.setAttribute('method','GET');
+    label.innerText = 'Enter your login to sign in'
+    button.innerText = "log in";
+    form.classList.toggle('hidden')
+}
+function signup() {
+    let form = document.getElementById('login');
+    let button = document.getElementById('submit-button')
+    let label = document.querySelector('label');
+    label.innerText = 'Create your login';
+    form.setAttribute('method','POST');
+    button.innerText = "sign up"
+    form.classList.toggle('hidden')
+}
+</script>
+</body>
+</html>
